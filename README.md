@@ -30,9 +30,14 @@ The game looks like a cozy, endless library that fades into the distance:  books
 Music & Sound (Still deciding on it)
 Storyboards, Samples, Diagrams, and Maps
 The following sketches and design samples illustrate how Flappy Word plays and evolves through its levels. These can be drawn on paper or made digitally and inserted into the document or uploaded separately.
+
 **Basic Gameplay Flow:**
  The opening storyboard shows the Knowledge Bird flapping through a horizontal library corridor lined with floating books. The player taps to keep the bird aloft while collecting glowing letters that spell the target word shown at the top (e.g., “RIVER”). Each frame depicts key moments:
+
 **Start Screen:** Displays the level name and theme (e.g., Geography).
+
 **Gameplay:** The bird collects letters while avoiding moving book spines and ink drops.
+
 **Word Completion:** The final letter triggers a small celebration animation.
+
 **Educational Screen:** A short definition or fun fact about the word appears (e.g., “A river is a natural flowing watercourse.”).
