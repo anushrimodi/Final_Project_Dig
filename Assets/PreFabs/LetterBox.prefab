@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+  m_Color: {r: 0.37518585, g: 0.4716981, b: 0.11347453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -204,8 +204,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278979620
+  m_fontColor: {r: 0.14150941, g: 0.048727296, b: 0.048727296, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503382791650407753}
   - component: {fileID: 4090369323278161963}
+  - component: {fileID: 8810154781494888404}
   m_Layer: 0
   m_Name: LetterBox
   m_TagString: Untagged
@@ -316,3 +317,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   letterBoxText: {fileID: 4020575282107968748}
+--- !u!114 &8810154781494888404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593917956718806337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0aa1cf44bbe04a74b0eff3f72eeb56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveLeft
+  speed: 3
+  destroyX: -12
