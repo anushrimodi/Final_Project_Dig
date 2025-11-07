@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject meaningPanel;           // Assign in inspector (panel GameObject)
     public TextMeshProUGUI meaningText;       // Assign in inspector (text inside panel)
 
+    public TextMeshProUGUI targetWordText;
+
     private void Awake()
     {
         // singleton-ish
@@ -27,19 +29,42 @@ public class GameManager : MonoBehaviour
         // Ensure UI initial state
         collectedWord = "";
         if (collectedWordText != null) collectedWordText.text = "";
-        if (meaningPanel != null) meaningPanel.SetActive(false);
+        meaningPanel.SetActive(false);
+        if (targetWordText != null)
+            targetWordText.text = "WORD: " + targetWord;
+
         Time.timeScale = 1f;
     }
 
+    // public void AddLetter(char letter)
+    // {
+    //     collectedWord += letter;
+    //     if (collectedWordText != null)
+    //         collectedWordText.text = collectedWord;
+
+    //     if (collectedWord.Equals(targetWord))
+    //         OnWordCompleted();
+    // }
+    
     public void AddLetter(char letter)
     {
         collectedWord += letter;
-        if (collectedWordText != null)
-            collectedWordText.text = collectedWord;
 
+        string display = "";
+        for (int i = 0; i < targetWord.Length; i++)
+        {
+            if (i < collectedWord.Length)
+                display += collectedWord[i] + " ";
+            else
+                display += "_ ";
+        }
+
+        collectedWordText.text = display;
+        
         if (collectedWord.Equals(targetWord))
             OnWordCompleted();
     }
+
 
     private void OnWordCompleted()
     {
