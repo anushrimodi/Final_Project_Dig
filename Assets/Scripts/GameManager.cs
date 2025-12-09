@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [Header("UI References")]
     public TextMeshProUGUI targetWordText;
 
+    public GameObject startPanel;   // drag StartPanel here in Inspector
+
     [Header("Collected Letter UI")]
     public Transform collectedLettersContainer;    // parent UI next to WORD: UNITY
     public GameObject letterBoxUIPrefab;           // prefab for collected letter block
@@ -34,15 +36,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         collectedLetters.Clear();
+
+        // Game should NOT run until Play is pressed
+        Time.timeScale = 0f;
+
         meaningPanel.SetActive(false);
-        UpdateCollectedSlots();
 
+        // If you have a Start Panel, show it here
+        if (startPanel != null)
+            startPanel.SetActive(true);
 
+        // Display the target word label
         if (targetWordText != null)
             targetWordText.text = "WORD: " + targetWord;
 
+        // Build all empty slots immediately
+        UpdateCollectedSlots();
+    }
+
+    
+
+    public void StartGame()
+    {
+        // hide the start screen
+        if (startPanel != null)
+            startPanel.SetActive(false);
+
+        // start running the game
         Time.timeScale = 1f;
     }
+
+
 
     /// <summary>
     /// Called by LetterCollision when the bird hits a letter.
@@ -71,6 +95,21 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Spawns the letter UI block next to WORD: UNITY.
     /// </summary>
+    /// 
+    private void SpawnCollectedLetterUI(char letter)
+    {
+    // Find index of this letter in the target word
+    int index = targetWord.IndexOf(letter);
+
+    // Find the slot at this index
+    Transform slot = collectedLettersContainer.GetChild(index);
+
+    // Fill the slot by setting its TMP text
+    var text = slot.GetComponentInChildren<TextMeshProUGUI>();
+    if (text != null)
+        text.text = letter.ToString();
+    }
+
     private void UpdateCollectedSlots()
     {
         // Clear all children
