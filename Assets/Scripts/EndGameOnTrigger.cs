@@ -3,10 +3,10 @@ using UnityEngine;
 public class EndGameOnTrigger : MonoBehaviour
 {
     private bool hasDied = false;
-    public GameObject restartButton; 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hasDied) return;   // prevents multiple triggers
+        if (hasDied) return;
 
         if (other.GetComponent<BirdController>())
         {
@@ -14,14 +14,14 @@ public class EndGameOnTrigger : MonoBehaviour
 
             Debug.Log("Game Over");
 
-            // 🔊 Play death sound here
+            // Play sound
             AudioManager.Instance.PlayLose();
 
-            // OPTIONAL: show restart button if it's separate
-            if (restartButton != null)
-                restartButton.SetActive(true);
+            // Show restart button from GameManager
+            if (GameManager.Instance.restartButton != null)
+                GameManager.Instance.restartButton.SetActive(true);
 
-            // ⏸ Pause game AFTER sound plays (optional: add delay if needed)
+            // Pause game
             Time.timeScale = 0f;
         }
     }

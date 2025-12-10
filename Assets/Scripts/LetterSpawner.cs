@@ -6,10 +6,13 @@ public class LetterSpawner : MonoBehaviour
     public float spawnInterval = 2f;
     public Vector2 spawnYRange = new Vector2(-1f, 2f);
 
-    private string targetWord = "UNITY";
+    private string targetWord;
 
     void Start()
     {
+        // Pull the correct word from GameManager
+        targetWord = GameManager.Instance.targetWord;
+
         InvokeRepeating(nameof(SpawnLetter), 2f, spawnInterval);
     }
 
@@ -20,11 +23,11 @@ public class LetterSpawner : MonoBehaviour
         // 20% fake letter
         if (Random.value < 0.2f)
         {
-            // pick fake letter not in UNITY
             do
             {
                 letter = (char)Random.Range('A', 'Z' + 1);
-            } while (targetWord.Contains(letter));
+            }
+            while (targetWord.Contains(letter));
         }
         else
         {

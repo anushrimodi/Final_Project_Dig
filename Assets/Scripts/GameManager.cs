@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Word Settings")]
-    public string targetWord = "UNITY";
+    public string targetWord = "CAT";
     private HashSet<char> collectedLetters = new HashSet<char>();
 
     [Header("UI References")]
@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     [Header("Meaning UI")]
     public GameObject meaningPanel;
     public TextMeshProUGUI meaningText;
+
+    [Header("Next Level UI")]
+    public GameObject nextLevelButton;
+
 
     [Header("Lose / Restart UI")]
     public GameObject restartButton;
@@ -42,6 +46,10 @@ public class GameManager : MonoBehaviour
 
         meaningPanel.SetActive(false);
 
+        // Hide restart button at start
+        if (restartButton != null)
+            restartButton.SetActive(false);
+
         // If you have a Start Panel, show it here
         if (startPanel != null)
             startPanel.SetActive(true);
@@ -50,7 +58,6 @@ public class GameManager : MonoBehaviour
         if (targetWordText != null)
             targetWordText.text = "WORD: " + targetWord;
 
-        // Build all empty slots immediately
         UpdateCollectedSlots();
     }
 
@@ -154,12 +161,18 @@ public class GameManager : MonoBehaviour
 
         meaningPanel.SetActive(true);
 
+        // Show restart button (Play Again)
         if (restartButton != null)
             restartButton.SetActive(true);
+
+        // Show next level button
+        if (nextLevelButton != null)
+            nextLevelButton.SetActive(true);
 
         meaningText.text =
             targetWord + ":\nThe state of being united or joined as a whole.";
     }
+
 
     /// <summary>
     /// Restart the current level.
@@ -169,4 +182,22 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f; // resume before switching scenes
+
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            // Optional: Loop back to Level 1
+            SceneManager.LoadScene(0);
+        }
+    }
+
 }
